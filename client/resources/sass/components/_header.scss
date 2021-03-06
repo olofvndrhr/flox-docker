@@ -1,0 +1,176 @@
+.header-wrap {
+  position: fixed;
+  z-index: 200;
+  width: 100%;
+
+  .subpage-open & {
+    position: absolute;
+  }
+}
+
+header {
+  background: $main2;
+  background: $gradient;
+  width: 100%;
+  padding: 25px 0;
+  position: relative;
+  z-index: 20;
+  opacity: 0;
+
+  .active & {
+    transition: opacity .7s ease .1s, padding-top .2s ease 0s, padding-bottom .2s ease 0s;
+    opacity: 1;
+  }
+  
+  .sticky & {
+    padding: 10px 0;
+    opacity: .97;
+  }
+
+  .subpage-open & {
+    background: none;
+    padding: 25px 0;
+  }
+  
+  .mobile-open & {
+    background: $gradient;
+  }
+
+  .open-modal & {
+    padding-right: 17px;
+  }
+}
+
+.logo {
+  float: left;
+  opacity: .9;
+  cursor: pointer;
+  user-select: none;
+  
+  img {
+    @include transition(width, height);
+
+    .sticky & {
+      //width: 90px;
+      //height: auto;
+    }
+  }
+
+  @include media(5) {
+    //width: 80px;
+    //height: auto;
+    //margin: 7px 0 0 0;
+
+    img {
+      //width: 100%;
+      //height: auto;
+    }
+  }
+}
+
+.site-nav,
+.site-nav-second {
+  float: left;
+  margin: 7px 0 0 40px;
+  list-style: none;
+  padding: 0;
+  opacity: .9;
+
+  @include media(3) {
+    clear: left;
+    float: left;
+    margin: 20px 0 0 0;
+  }
+  
+  @include media(5) {
+    display: none;
+    margin: 0;
+    width: 100%;
+    
+    .mobile-open & {
+      display: block;
+    }
+  }
+
+  li {
+    float: left;
+    margin: 0 20px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+    
+    @include media(5) {
+      width: 33%;
+      margin: 0;
+    }
+    
+    @include media(6) {
+      width: 100%;
+    }
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    float: left;
+    border-bottom: 2px solid transparent;
+
+    &.router-link-active {
+      border-bottom: 2px solid #fff;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+
+    @include media(3) {
+      font-size: 14px;
+    }
+    
+    @include media(5) {
+      padding: 8px 0;
+    }
+  }
+}
+
+.site-nav-first {
+  @include media(5) {
+    margin: 15px 0 0 0;
+  }
+}
+
+.site-nav-second {
+  float: right;
+  margin: 7px 0 0 0;
+
+  @include media(3) {
+    clear: none;
+    float: left;
+    margin: 20px 0 0 15px;
+  }
+  
+  @include media(5) {
+    margin: 0;
+  }
+}
+
+.icon-hamburger {
+  background: url(../../../public/assets/img/hamburger.png);
+  width: 31px;
+  height: 23px;
+  float: right;
+  display: none;
+  margin: 6px 0 0 0;
+  cursor: pointer;
+  
+  &:active {
+    opacity: .6;
+  }
+  
+  @include media(5) {
+    display: block;
+  }
+}

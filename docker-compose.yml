@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  flox:
+    build: '.'
+    image: flox:latest
+    container_name: flox-app
+    restart: unless-stopped
+    ports: ["80:80"]
+    networks:
+      - test1
+    volumes:
+      - ./data:/var/www/flox # Host system folder
+    environment:
+      - TMDB_API_KEY= # The TMDB API key to use - required for startup
+      - FLOX_DB_INIT=true # Run db init at container startup
+      - FLOX_ADMIN_USER=admin # The admin username for FLOX_DB_INIT
+      - FLOX_ADMIN_PASS=admin # The admin password for FLOX_DB_INIT
+      - FLOX_DB_CONNECTION=sqlite # The database connection to use
+      - FLOX_DB_NAME=/var/www/flox/backend/database/database.sqlite # The DB Name (or path if sqlite)
+      - FLOX_DAILY_REMINDER_TIME=10:00 # The daily reminder time
+      - FLOX_WEEKLY_REMINDER_TIME=20:00 # The weekly reminder time
+      - FLOX_TIMEZONE=CET # The timezone Flox is running in
+      - FLOX_MAIL_DRIVER=smtp # Mail Driver to send mails (default: smtp)
+      - FLOX_MAIL_HOST= # Hostname of the mail server
+      - FLOX_MAIL_PORT= # Port of the mail server (SMTP Port)
+      - FLOX_MAIL_USERNAME= # User name on the mail server
+      - FLOX_MAIL_PASSWORD= # User password
+      - FLOX_MAIL_ENCRYPTION=tls # Encryption Type (tls,ssl,none)
+      - UID=1000 # Unix user ID to run the container as
+      - GID=1000 # Unix group ID to run the container as
+#      - FLOX_DB_HOST= # The database host
+#      - FLOX_DB_PORT= # The database port
+#      - FLOX_DB_USER= # The database user
+#      - FLOX_DB_PASS= # The database password
+#      - FLOX_APP_ENV=local # The laravel app env
+#      - FLOX_APP_DEBUG=false # Run in debug mode
+#      - FLOX_APP_URL=http://localhost # The URL you will be hosting the app on
+#      - FLOX_CLIENT_URI=/ # The relative path you are hosting on
+      
+networks:
+  test1:
+    external: true
